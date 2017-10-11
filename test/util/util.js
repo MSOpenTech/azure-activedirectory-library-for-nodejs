@@ -417,6 +417,21 @@ util.setupExpectedClientCredTokenRequestResponse = function(httpCode, returnDoc,
   return util.setupExpectedOAuthResponse(queryParameters, parameters.tokenUrlPath, httpCode, returnDoc, authEndpoint);
 };
 
+util.setupExpectedOnBehalfOfTokenRequestResponse = function(httpCode, userAccessToken, returnDoc, authorityEndpoint) {
+  var authEndpoint = authorityEndpoint || parameters.authority;
+
+  var queryParameters = {};
+  queryParameters['grant_type'] = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
+  queryParameters['client_id'] = parameters.clientId;
+  queryParameters['client_secret'] = parameters.clientSecret;
+  queryParameters['resource'] = parameters.resource;
+  queryParameters['assertion'] = userAccessToken;
+  queryParameters['requested_token_use'] = 'on_behalf_of';
+  queryParameters['scope'] = 'openid';
+
+  return util.setupExpectedOAuthResponse(queryParameters, parameters.tokenUrlPath, httpCode, returnDoc, authEndpoint);
+};
+
 util.setupExpectedInstanceDiscoveryRequest = function(httpCode, discoveryHost, returnDoc, authority) {
   var instanceDiscoveryUrl = {};
   instanceDiscoveryUrl.protocol = 'https:';
