@@ -83,6 +83,15 @@ logging.setLoggingOptions({
   level: logging.LOGGING_LEVEL.VERBOSE,
   loggingWithPII: true
 });
+
+//PII or OII logging enabled.
+logging.setLoggingOptions({
+  log: function(level, message, error) {
+    // provide your own implementation of the log function
+  },
+  level: logging.LOGGING_LEVEL.VERBOSE,
+  loggingWithPII: true
+});
 ```
 
 ### Authorization Code
